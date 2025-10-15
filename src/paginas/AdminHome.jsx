@@ -7,10 +7,10 @@ import '../estilos/Administrador/AdminHome.css';
 
 function AdminHome() {
     return (
-        <div className="admin-dashboard-layout"> 
+        <div className="AH-admin-dashboard-layout"> 
             <AdminMenu />
-            <main>
-            <div className="app">
+            <main className="AH-mainHome">
+            <div className="AH-app">
                 <h1>Bienvenido al home</h1> 
             </div>
             </main>

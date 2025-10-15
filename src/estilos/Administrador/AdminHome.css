@@ -1,0 +1,42 @@
+.AH-admin-dashboard-layout {
+    display: grid;
+    height: 100vh;
+    overflow-x: hidden;
+    grid-template-columns: 250px 1fr; 
+    grid-template-rows: 1fr;
+}
+
+.AH-mainHome {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    padding: 30px; 
+    background-color: #ecf0f1; 
+    overflow-y: auto; 
+}
+
+.AH-app {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.AH-app h1 {
+    color: #34495e;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    
+    .AH-admin-dashboard-layout {
+        grid-template-columns: 1fr; 
+        height: auto; 
+    }
+
+    .AH-mainHome {
+        grid-column: 1 / 2; 
+        padding: 15px; 
+        margin-left: 0; 
+    }
+}

@@ -1,41 +1,32 @@
-/*
-  Archivo: InicioSesion.css
-  Para el componente de React InicioSesion
-*/
 
-/* --- Estilos del Contenedor Principal (Centrado) --- */
-
-/* El div principal con la clase 'card' */
 .IS-cardInicioSesion {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh; /* Ocupa toda la altura de la vista */
+    min-height: 100vh; 
     padding: 20px;
-    background-color: #f4f7f6; /* Fondo suave para destacar la tarjeta */
+    background-color: #f4f7f6; 
     box-sizing: border-box;
 }
 
-/* La "tarjeta" de inicio de sesión */
 .IS-cardInicioSesion > div:not(.Logo), .IS-cardInicioSesion > h2, .IS-cardInicioSesion > form {
     background: #ffffff;
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 400px; /* Ancho un poco más pequeño que el registro */
+    max-width: 400px; 
     box-sizing: border-box;
 }
 
-/* Ajustes específicos para el contenido de la tarjeta */
 .IS-cardInicioSesion > h2 {
     text-align: center;
     color: #333;
     margin-bottom: 20px;
     font-size: 1.6em;
-    padding: 20px 40px 0 40px; /* Ajusta el padding para solo tener top */
-    box-shadow: none; /* Quita la sombra del h2 para que parezca parte de la tarjeta */
+    padding: 20px 40px 0 40px; 
+    box-shadow: none; 
     background: transparent;
 }
 
@@ -57,29 +48,23 @@
     background-color: #0056b3;
 }
 
-
-/* --- Estilos del Logo --- */
-
 .IS-Logo {
     text-align: center;
-    margin-bottom: 0px; /* Espacio entre el logo y el título */
+    margin-bottom: 0px; 
 }
 
 .IS-PaginaLogo {
-    width: 100px; /* Tamaño del logo */
+    width: 100px; 
     height: auto;
 }
-
-/* --- Estilos del Formulario y Campos --- */
 
 #loginForm {
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Espacio entre los campos y el botón */
-    padding-top: 0; /* Asegura que el formulario no tenga padding superior extra */
+    gap: 20px; 
+    padding-top: 0; 
 }
 
-/* Contenedor de cada campo (label + input + error) */
 .IS-field {
     display: flex;
     flex-direction: column;
@@ -108,18 +93,16 @@
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
 }
 
-/* --- Mensajes de Error y Éxito --- */
-
 .IS-error {
-    color: #dc3545; /* Rojo para errores */
+    color: #dc3545; 
     font-size: 0.8em;
     margin-top: 5px;
     padding-left: 2px;
-    min-height: 18px; /* Evita saltos de layout */
+    min-height: 18px; 
 }
 
 .IS-success {
-    color: #28a745; /* Verde para éxito */
+    color: #28a745; 
 }
 
 #IS-message {
@@ -129,16 +112,13 @@
     margin-top: 5px;
 }
 
-/* Estilos para el texto dentro del mensaje dinámico */
 #IS-message p {
     margin: 0;
     padding: 5px 0;
 }
 
-/* --- Botón de Enviar (Entrar) --- */
-
 #loginForm button[type="submit"] {
-    background-color: #007bff; /* Color azul primario */
+    background-color: #007bff; 
     color: white;
     padding: 12px 20px;
     border: none;
