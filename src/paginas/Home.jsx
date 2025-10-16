@@ -1,13 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../componentes/Header'; 
-import Footer from '../componentes/Footer'; 
+import Header from '../componentes/Header';
+import Footer from '../componentes/Footer';
+import Button from '../componentes/Button';
 
 import '../estilos/Tienda/index.css';
 import '../estilos/Tienda/Home.css';
 
 function Home() {
-    
+
     // 1. INICIALIZA EL HOOK useNavigate
     const navigate = useNavigate();
 
@@ -19,25 +20,23 @@ function Home() {
 
     return (
         // 3. Eliminamos <head>, <body> y el código de importación de HTML/JS
-        <div className="body-home"> 
-            
+        <div className="body-home">
+
             {/* Reemplaza <div id="header"></div> */}
             <Header />
 
             <div className="container-home-btn">
                 <h1>Bienvenido a la Página Principal
-                    <button 
-                        className="btn1-home" 
-                        onClick={() => handleNavigation('/RegistroUsuario')}
-                    >
-                        Registro Usuario
-                    </button>
-                    <button 
-                        className="btn2-home" 
-                        onClick={() => handleNavigation('/InicioSesion')}
+                    <botonInicioSesion />
+                        
+                    
+                        
+                
+                    <Button
+                        
                     >
                         Iniciar Sesión
-                    </button>
+                    </Button>
                 </h1>
             </div>
 
@@ -54,9 +53,9 @@ function Home() {
                 </div>
 
                 {/* Repetir para los otros productos... */}
-                
+
             </main>
-            
+
             <Footer />
         </div>
     );

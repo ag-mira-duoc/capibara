@@ -6,7 +6,7 @@
 }
 
 .container-home-btn h1{
-    justify-content: space-between; /* h1 a la izquierda, botones a la derecha */
+    justify-content: space-between; 
     margin-bottom: 20px;
     color: #333;
 }
@@ -21,6 +21,8 @@
     cursor: pointer;
     transition: 0.3s;
 }
+
+
 
 /*main home*/
 .main-body {
