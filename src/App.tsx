@@ -9,6 +9,8 @@ import DetallesProducto from '../src/paginas/DetallesProducto.jsx';
 import RegistroUsuario from '../src/paginas/RegistroUsuario.jsx'; 
 import InicioSesion from '../src/paginas/InicioSesion.jsx'; 
 import AdminHome from '../src/paginas/AdminHome.jsx'; 
+import AdminVentas from '../src/paginas/AdminVentas.jsx'; 
+import AdminInventario from '../src/paginas/AdminInventario.jsx'; 
 
 function App() {
   return (
@@ -27,7 +29,9 @@ function App() {
         <Route path="/RegistroUsuario" element={<RegistroUsuario />} />
         <Route path="/InicioSesion" element={<InicioSesion />} />
 
-        <Route path="/AdminHome" element={<AdminHome />} /> 
+        <Route path="/AdminHome" element={<AdminHome />} />
+        <Route path="/AdminVentas" element={<AdminVentas />} />
+        <Route path="/AdminInventario" element={<AdminInventario />} />
 
       </Routes>
     </BrowserRouter>
