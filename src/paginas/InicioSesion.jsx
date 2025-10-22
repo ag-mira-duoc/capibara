@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { validateLogin } from '../utiles/validaciones.js';
 import '../estilos/Tienda/InicioSesion.css'; 
@@ -59,33 +59,34 @@ function InicioSesion() {
     };
 
     return (
-        <div className="card">
-            <div className="Logo">
-                <img className="PaginaLogo" src="/Agregados/img/2111125.png" alt="Logo" />
+        <main className="IS-cardInicioSesion">
+            <Link className="IS-botonIS-home" to="/Home">🏠 Home</Link>
+            <div className="IS-Logo">
+                <img className="IS-PaginaLogo" src="/public/img/2111125.png" alt="Logo" />
             </div>
             <h2>Iniciar Sesión</h2>
             <form id="loginForm" onSubmit={handleSubmit} noValidate>
                 
-                <div className="field">
+                <div className="IS-field">
                     <label htmlFor="email">Correo electrónico</label>
-                    <input type="email" id="email" name="email" required placeholder="tu@correo.com"
+                    <input type="email" id="IS-email" name="email" required placeholder="tu@correo.com"
                            value={formData.email} onChange={handleChange} />
                     {/* Optional: Add error display here */}
-                    {errors.email && <div className="error">{errors.email}</div>}
+                    {errors.email && <div className="IS-error">{errors.email}</div>}
                 </div>
                 
-                <div className="field">
+                <div className="IS-field">
                     <label htmlFor="password">Contraseña</label>
-                    <input type="password" id="password" name="password" required placeholder="Ingresa tu contraseña"
+                    <input type="password" id="IS-password" name="password" required placeholder="Ingresa tu contraseña"
                            value={formData.password} onChange={handleChange} />
-                    {errors.password && <div className="error">{errors.password}</div>}
+                    {errors.password && <div className="IS-error">{errors.password}</div>}
                 </div>
                 
                 <button type="submit">Entrar</button>
                 {/* Display dynamic message */}
-                <div id="message" dangerouslySetInnerHTML={{ __html: message }}></div>
+                <div id="IS-message" dangerouslySetInnerHTML={{ __html: message }}></div>
             </form>
-        </div>
+        </main>
     );
 }
 
