@@ -1,41 +1,80 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from '../src/paginas/Home.jsx';
-import Productos from '../src/paginas/Productos.jsx'; 
-import Nosotros from '../src/paginas/Nosotros.jsx'; 
-import Contacto from '../src/paginas/Contacto.jsx'; 
-import Blog from '../src/paginas/Blog.jsx'; 
-import DetallesProducto from '../src/paginas/DetallesProducto.jsx'; 
-import RegistroUsuario from '../src/paginas/RegistroUsuario.jsx'; 
-import InicioSesion from '../src/paginas/InicioSesion.jsx'; 
-import AdminHome from '../src/paginas/AdminHome.jsx'; 
-import AdminVentas from '../src/paginas/AdminVentas.jsx'; 
-import AdminInventario from '../src/paginas/AdminInventario.jsx'; 
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/navbar/Navbar';
+import Footer from './components/footer/Footer';
+import Home from './pages/Home';
+import Products from './pages/Products';
+import Cart from './components/cart/Cart';
+import { mockProducts } from './mocks/mockData';
+import { Product, CartItem } from './types';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
-function App() {
+const App: React.FC = () => {
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [products] = useState<Product[]>(mockProducts);
+
+  const addToCart = (product: Product): void => {
+    const existingItem = cart.find(item => item.id === product.id);
+    
+    if (existingItem) {
+      setCart(cart.map(item =>
+        item.id === product.id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      ));
+    } else {
+      setCart([...cart, { ...product, quantity: 1 }]);
+    }
+  };
+
+  const updateQuantity = (id: number, quantity: number): void => {
+    if (quantity < 1) return;
+    setCart(cart.map(item =>
+      item.id === id ? { ...item, quantity } : item
+    ));
+  };
+
+  const removeFromCart = (id: number): void => {
+    setCart(cart.filter(item => item.id !== id));
+  };
+
+  const clearCart = (): void => {
+    setCart([]);
+  };
+
+  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+
   return (
-    <BrowserRouter>
-      <Routes>
+    <Router>
+      <div className="d-flex flex-column min-vh-100">
+        <Navbar cartCount={cartCount} />
+        
+        <main className="flex-grow-1">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route 
+              path="/productos" 
+              element={<Products products={products} onAddToCart={addToCart} />} 
+            />
+            <Route 
+              path="/carrito" 
+              element={
+                <Cart 
+                  cart={cart} 
+                  onUpdateQuantity={updateQuantity}
+                  onRemove={removeFromCart}
+                  onClearCart={clearCart}
+                />
+              } 
+            />
+          </Routes>
+        </main>
 
-        <Route path="/" element={<Home />} /> 
-        <Route path="/Home" element={<Home />} />
-
-        <Route path="/Productos" element={<Productos />} />
-        <Route path="/Nosotros" element={<Nosotros />} />
-        <Route path="/Contacto" element={<Contacto />} />
-        <Route path="/Blog" element={<Blog />} />
-        <Route path="/DetallesProducto" element={<DetallesProducto />} />
-
-        <Route path="/RegistroUsuario" element={<RegistroUsuario />} />
-        <Route path="/InicioSesion" element={<InicioSesion />} />
-
-        <Route path="/AdminHome" element={<AdminHome />} />
-        <Route path="/AdminVentas" element={<AdminVentas />} />
-        <Route path="/AdminInventario" element={<AdminInventario />} />
-
-      </Routes>
-    </BrowserRouter>
+        <Footer />
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
