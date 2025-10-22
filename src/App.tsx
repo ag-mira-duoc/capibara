@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/navbar/Navbar';
 import Footer from './components/footer/Footer';
+import ProtectedRoute from './components/ProtectedRoute';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import Cart from './components/cart/Cart';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Contact from './pages/Contact';
+import About from './pages/About';
+import Admin from './pages/Admin';
 import { mockProducts } from './mocks/mockData';
 import { Product, CartItem } from './types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const App: React.FC = () => {
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -46,34 +54,48 @@ const App: React.FC = () => {
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <Router>
-      <div className="d-flex flex-column min-vh-100">
-        <Navbar cartCount={cartCount} />
-        
-        <main className="flex-grow-1">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route 
-              path="/productos" 
-              element={<Products products={products} onAddToCart={addToCart} />} 
-            />
-            <Route 
-              path="/carrito" 
-              element={
-                <Cart 
-                  cart={cart} 
-                  onUpdateQuantity={updateQuantity}
-                  onRemove={removeFromCart}
-                  onClearCart={clearCart}
-                />
-              } 
-            />
-          </Routes>
-        </main>
+    <AuthProvider>
+      <Router>
+        <div className="d-flex flex-column min-vh-100">
+          <Navbar cartCount={cartCount} />
+          
+          <main className="flex-grow-1">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route 
+                path="/productos" 
+                element={<Products products={products} onAddToCart={addToCart} />} 
+              />
+              <Route 
+                path="/carrito" 
+                element={
+                  <Cart 
+                    cart={cart} 
+                    onUpdateQuantity={updateQuantity}
+                    onRemove={removeFromCart}
+                    onClearCart={clearCart}
+                  />
+                } 
+              />
+              <Route path="/login" element={<Login />} />
+              <Route path="/registro" element={<Register />} />
+              <Route path="/contacto" element={<Contact />} />
+              <Route path="/nosotros" element={<About />} />
+              <Route 
+                path="/admin" 
+                element={
+                  <ProtectedRoute requireAdmin>
+                    <Admin />
+                  </ProtectedRoute>
+                } 
+              />
+            </Routes>
+          </main>
 
-        <Footer />
-      </div>
-    </Router>
+          <Footer />
+        </div>
+      </Router>
+    </AuthProvider>
   );
 };
 
