@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/navbar/Navbar';
+import Checkout from './pages/Checkout';
 import Footer from './components/footer/Footer';
 import ProtectedRoute from './components/ProtectedRoute';
 import Home from './pages/Home';
@@ -19,84 +20,93 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const App: React.FC = () => {
-  const [cart, setCart] = useState<CartItem[]>([]);
-  const [products] = useState<Product[]>(mockProducts);
+    const [cart, setCart] = useState<CartItem[]>([]);
+    const [products] = useState<Product[]>(mockProducts);
 
-  const addToCart = (product: Product): void => {
-    const existingItem = cart.find(item => item.id === product.id);
-    
-    if (existingItem) {
-      setCart(cart.map(item =>
-        item.id === product.id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      ));
-    } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
-    }
-  };
+    const addToCart = (product: Product): void => {
+        const existingItem = cart.find(item => item.id === product.id);
 
-  const updateQuantity = (id: number, quantity: number): void => {
-    if (quantity < 1) return;
-    setCart(cart.map(item =>
-      item.id === id ? { ...item, quantity } : item
-    ));
-  };
+        if (existingItem) {
+            setCart(cart.map(item =>
+                item.id === product.id
+                    ? { ...item, quantity: item.quantity + 1 }
+                    : item
+            ));
+        } else {
+            setCart([...cart, { ...product, quantity: 1 }]);
+        }
+    };
 
-  const removeFromCart = (id: number): void => {
-    setCart(cart.filter(item => item.id !== id));
-  };
+    const updateQuantity = (id: number, quantity: number): void => {
+        if (quantity < 1) return;
+        setCart(cart.map(item =>
+            item.id === id ? { ...item, quantity } : item
+        ));
+    };
 
-  const clearCart = (): void => {
-    setCart([]);
-  };
+    const removeFromCart = (id: number): void => {
+        setCart(cart.filter(item => item.id !== id));
+    };
 
-  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+    const clearCart = (): void => {
+        setCart([]);
+    };
 
-  return (
-    <AuthProvider>
-      <Router>
-        <div className="d-flex flex-column min-vh-100">
-          <Navbar cartCount={cartCount} />
-          
-          <main className="flex-grow-1">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route 
-                path="/productos" 
-                element={<Products products={products} onAddToCart={addToCart} />} 
-              />
-              <Route 
-                path="/carrito" 
-                element={
-                  <Cart 
-                    cart={cart} 
-                    onUpdateQuantity={updateQuantity}
-                    onRemove={removeFromCart}
-                    onClearCart={clearCart}
-                  />
-                } 
-              />
-              <Route path="/login" element={<Login />} />
-              <Route path="/registro" element={<Register />} />
-              <Route path="/contacto" element={<Contact />} />
-              <Route path="/nosotros" element={<About />} />
-              <Route 
-                path="/admin" 
-                element={
-                  <ProtectedRoute requireAdmin>
-                    <Admin />
-                  </ProtectedRoute>
-                } 
-              />
-            </Routes>
-          </main>
+    const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
 
-          <Footer />
-        </div>
-      </Router>
-    </AuthProvider>
-  );
+    return (
+        <AuthProvider>
+            <Router>
+                <div className="d-flex flex-column min-vh-100">
+                    <Navbar cartCount={cartCount} />
+
+                    <main className="flex-grow-1">
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route
+                                path="/productos"
+                                element={<Products products={products} onAddToCart={addToCart} />}
+                            />
+                            <Route
+                                path="/carrito"
+                                element={
+                                    <Cart
+                                        cart={cart}
+                                        onUpdateQuantity={updateQuantity}
+                                        onRemove={removeFromCart}
+                                        onClearCart={clearCart}
+                                    />
+                                }
+                            />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/registro" element={<Register />} />
+                            <Route path="/contacto" element={<Contact />} />
+                            <Route path="/nosotros" element={<About />} />
+                            <Route
+                                path="/admin"
+                                element={
+                                    <ProtectedRoute requireAdmin>
+                                        <Admin />
+                                    </ProtectedRoute>
+                                }
+                            />
+                            <Route
+                                path="/checkout"
+                                element={
+                                    <Checkout
+                                        cart={cart}
+                                        onClearCart={clearCart}
+                                    />
+                                }
+                            />
+                        </Routes>
+                    </main>
+
+                    <Footer />
+                </div>
+            </Router>
+        </AuthProvider>
+    );
 };
 
 export default App;
