@@ -14,8 +14,8 @@ module.exports = function(config) {
 
     // Preprocesadores
     preprocessors: {
-      'src/**/*.ts': ['karma-typescript'],
-      'src/**/*.tsx': ['karma-typescript']
+      '**/*.ts': ['karma-typescript'],
+      '**/*.tsx': ['karma-typescript']
     },
 
     // Configuración de TypeScript para Karma
@@ -39,7 +39,7 @@ module.exports = function(config) {
     },
 
     // Reporteros
-    reporters: ['progress', 'kjhtml', 'coverage'],
+    reporters: ['progress', 'kjhtml', 'coverage', 'karma-typescript'],
 
     // Configuración de cobertura
     coverageReporter: {

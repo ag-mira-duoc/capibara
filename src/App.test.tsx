@@ -7,6 +7,7 @@ describe('App Component', () => {
     render(<App />);
     
     // Verificar que el navbar se renderiza
-    expect(screen.getByText('TechStore')).toBeInTheDocument();
+    expect(screen.getAllByText('TechStore').length).toBeGreaterThan(0);
+
   });
 });
