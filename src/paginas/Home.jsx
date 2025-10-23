@@ -2,9 +2,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../componentes/Header'; 
 import Footer from '../componentes/Footer'; 
+import CarruselHome from '../componentes/Carrusel'; 
 
 import '../estilos/Tienda/index.css';
 import '../estilos/Tienda/Home.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Home() {
     
@@ -42,18 +44,7 @@ function Home() {
             </div>
 
             <main className="main-body">
-                {/* 4. Cambiamos 'class' por 'className' y ajustamos paths de imagen */}
-                <div className="card-home">
-                    <img src="/Agregados/img/9d580bf9-472e-44ce-816c-8fc07c62707f.87587bfc22905c8b07036d3e4e8298b7.avif" alt="Producto 1" />
-                    <div className="card-content">
-                        <h3>Producto 1</h3>
-                        <p>Descripción breve del producto número 1.</p>
-                        <div className="price">$12.990</div>
-                        <button onClick={() => console.log('Producto 1 añadido al carrito')}>Comprar</button>
-                    </div>
-                </div>
-
-                {/* Repetir para los otros productos... */}
+                <CarruselHome />
                 
             </main>
             
