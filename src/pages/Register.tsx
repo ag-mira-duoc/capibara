@@ -25,11 +25,13 @@ const Register: React.FC = () => {
       return;
     }
 
-    const success = await register(name, email, password);
-    if (success) {
-      navigate('/');
-    } else {
-      setError('Error al registrar usuario');
+    try {
+      const success = await register(name, email, password);
+      if (success) {
+        navigate('/');
+      }
+    } catch (err: any) {
+      setError(err.message || 'Error al registrar usuario');
     }
   };
 

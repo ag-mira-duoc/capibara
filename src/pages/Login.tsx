@@ -13,11 +13,13 @@ const Login: React.FC = () => {
     e.preventDefault();
     setError('');
 
-    const success = await login(email, password);
-    if (success) {
-      navigate('/');
-    } else {
-      setError('Credenciales incorrectas');
+    try {
+      const success = await login(email, password);
+      if (success) {
+        navigate('/');
+      }
+    } catch (err: any) {
+      setError(err.message || 'Error al iniciar sesión');
     }
   };
 
@@ -87,7 +89,9 @@ const Login: React.FC = () => {
 
               <div className="alert alert-info mb-0">
                 <small>
-                  <strong>Demo:</strong> admin@techstore.cl / admin123
+                  <strong>Credenciales de prueba:</strong><br />
+                  <strong>Admin:</strong> admin@capibara.cl / admin123<br />
+                  <strong>Usuario:</strong> usuario@capibara.cl / usuario123
                 </small>
               </div>
             </div>
